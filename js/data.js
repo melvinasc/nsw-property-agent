@@ -16,7 +16,7 @@
  *    It looks like: https://nsw-property-proxy.YOUR_NAME.workers.dev
  */
 
-const PROXY_URL = "nsw-property-proxy.levna1608-fa3.workers.dev";
+const PROXY_URL = "https://nsw-property-proxy.levna1608-fa3.workers.dev";
 
 // ─────────────────────────────────────────────────────────────
 //  Core proxy fetch — all requests go through Cloudflare
