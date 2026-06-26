@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NSW Property Agent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="hero-eyebrow">AI-powered property search</p>
+        <h1 class="hero-title">What's your<br><em>NSW budget?</em></h1>
+        <p class="hero-sub">Enter your budget and the AI agent will find matching properties, recommend suburbs, chart price trends, and give you a plain-English summary.</p>
+
+        <div class="search-card">
+          <div class="search-row">
+            <div class="input-group">
+              <label for="budget">Your budget</label>
+              <div class="input-wrap">
+                <span class="prefix">$</span>
+                <input type="number" id="budget" placeholder="750000" min="100000" max="10000000" step="50000" />
+              </div>
+            </div>
+            <div class="input-group">
+              <label for="property-type">Property type</label>
+              <select id="property-type">
+                <option value="all">All types</option>
+                <option value="house">House</option>
+                <option value="unit">Unit / Apartment</option>
+                <option value="townhouse">Townhouse</option>
+                <option value="land">Land</option>
+              </select>
+            </div>
+            <div class="input-group">
+              <label for="bedrooms">Bedrooms</label>
+              <select id="bedrooms">
+                <option value="any">Any</option>
+                <option value="1">1+</option>
+                <option value="2">2+</option>
+                <option value="3">3+</option>
+                <option value="4">4+</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="search-row">
+            <div class="input-group wide">
+              <label for="suburb-pref">Preferred area or suburb (optional)</label>
+              <input type="text" id="suburb-pref" placeholder="e.g. Inner West, Parramatta, North Shore…" />
+            </div>
+          </div>
+
+          <button class="search-btn" id="search-btn" onclick="runAgent()">
+            <span class="btn-icon">⬡</span>
+            Search properties
+          </button>
+        </div>
+
+        <p class="disclaimer">Data sourced from NSW Government Open Data & Domain.com.au public listings. AI powered by Hugging Face (free, no key needed).</p>
+      </div>
+    </section>
+
+    <!-- RESULTS -->
+    <section class="results-section" id="results-section" style="display:none">
+      <div class="results-inner">
+
+        <!-- Agent status bar -->
+        <div class="agent-log" id="agent-log">
+          <div class="agent-log-header">
+            <span class="pulse"></span>
+            Agent running…
+          </div>
+          <div class="log-steps" id="log-steps"></div>
+        </div>
+
+        <!-- Tabs -->
+        <div class="tabs" id="tabs" style="display:none">
+          <button class="tab active" data-tab="properties">🏠 Properties</button>
+          <button class="tab" data-tab="suburbs">📍 Suburbs</button>
+          <button class="tab" data-tab="trends">📈 Price Trends</button>
+          <button class="tab" data-tab="summary">🤖 AI Summary</button>
+        </div>
+
+        <div class="tab-content" id="tab-properties">
+          <div class="properties-grid" id="properties-grid"></div>
+        </div>
+
+        <div class="tab-content hidden" id="tab-suburbs">
+          <div class="suburbs-list" id="suburbs-list"></div>
+        </div>
+
+        <div class="tab-content hidden" id="tab-trends">
+          <div class="chart-wrap">
+            <canvas id="trendsChart"></canvas>
+          </div>
+        </div>
+
+        <div class="tab-content hidden" id="tab-summary">
+          <div class="ai-summary-box" id="ai-summary-box">
+            <div class="summary-icon">🤖</div>
+            <div class="summary-text" id="summary-text"></div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-section">
+      <div class="how-inner">
+        <h2>How it works</h2>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <h3>Enter your budget</h3>
+            <p>Set your max spend, property type, bedrooms, and preferred area in NSW.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <h3>Agent fetches data</h3>
+            <p>Pulls live listings from NSW Gov Open Data and Domain.com.au public feeds simultaneously.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <h3>AI analyses results</h3>
+            <p>Google Gemini filters, ranks, and summarises everything in plain English — no jargon.</p>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <h3>You get the full picture</h3>
+            <p>Matching properties, suburb recommendations, price trend charts, and an AI briefing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>Open source · <a href="https://github.com/yourusername/nsw-property-agent" target="_blank">View on GitHub</a> · Data: NSW Gov &amp; Domain · AI: Google Gemini free tier</p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/agent.js"></script>
+  <script src="js/ui.js"></script>
+</body>
+</html>
